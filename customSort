@@ -1,0 +1,16 @@
+var currentLetter = '';
+
+dust.helpers.customSort = function (chunk, ctx, bodies, params) {
+   //The param passed in is actually an array with 1 element, the letter as a string
+    var contentStr = '';
+    var tempLetter = params.val[0];
+    if (tempLetter !== currentLetter) {
+        currentLetter = tempLetter;
+        contentStr += '<a name="' + currentLetter.trim() + '" data-magellan-destination="' + currentLetter.trim() + '"> </a> ';
+        contentStr += '<p class="spaced"> </p>';
+        contentStr += '<div class="glossary-letter">' + currentLetter + '</div>';
+        return chunk.write(contentStr);
+    } else {
+        return chunk.write('');
+    }
+};
